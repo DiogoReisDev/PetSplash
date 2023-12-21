@@ -9,7 +9,7 @@
     <title>PetSplash Reservas</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/starter-template/">
-
+    <script src="bootstrap.bundle.min.js"></script>
 
     <!-- Bootstrap core CSS, conecta ao arquivo CSS da pasta -->
   <link href="bootstrap.min.css" rel="stylesheet">
@@ -51,26 +51,28 @@
 
         <div class="mb-5">
           <a id = "botao" href="reserva.html" class="btn btn-primary btn-lg px-4">Reserve Aqui</a>
+          <script>
+            function clickReserva(evento) {
+              evento.preventDefault();
+              alert("Indo para Reserva");
+              //Time Wait de 1 segundo e em seguida é chamado para abrir o reserva.html
+              setTimeout(function() {
+                window.location.href = "reserva.html";
+              }, 1000);
+            }
+            let botao = document.getElementById('botao');
+            botao.onclick = clickReserva;
+          </script>  
         </div>
 
         <footer class="pt-5 my-5 text-muted border-top">
           <div class="linkedin">
-            <a id = 'diogo' href = 'https://www.linkedin.com/in/diogo-santana-aa26a8187/'>
+            <a id = 'diogo' href = 'https://www.linkedin.com/in/diogo-santana-aa26a8187/' target="_blank">
               Dev - Diogo Santana &middot; &copy; 2023
             </a>
           </div>
         </footer>
       </main>
-    </div>
-
-    <script src="bootstrap.bundle.min.js"></script>
-    <script>
-        function clickReserva(evento) {
-            evento.preventDefault()
-            alert("Indo para Reserva")
-          }
-          let botao = document.getElementById('botao')
-          botao.onclick = clickReserva
-    </script>       
+    </div>     
   </body>
 </html>

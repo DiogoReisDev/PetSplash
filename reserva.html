@@ -50,6 +50,25 @@
     <div class="col-md-4">
       <label for="id_telefone" class="form-label">Telefone:</label>
       <input id="id_telefone" name="telefone" type="text" class="form-control">
+      <script>
+        function formatarTelefone() {
+          let telefone = document.getElementById('id_telefone').value;
+          // Remove caracteres indesejados, deixando apenas os dígitos
+          telefone = telefone.replace(/\D/g, '');
+          // Verifica o comprimento do número e aplica a formatação adequada
+          if (telefone.length === 11) {
+            telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+          } else if (telefone.length === 10) {
+            telefone = telefone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+          }
+          // Atualiza o valor do campo com o número formatado
+          document.getElementById('id_telefone').value = telefone;
+        }   
+        // Adiciona a função de formatação aos eventos de entrada e colagem
+        let campoTelefone = document.getElementById('id_telefone');
+        campoTelefone.addEventListener('input', formatarTelefone);
+        campoTelefone.addEventListener('paste', formatarTelefone);
+      </script>
     </div>
     <div class="col-md-4">
       <label for="id_turno_banho" class="form-label">Turno do Banho:</label>
@@ -71,34 +90,33 @@
     <div class="col-md-3">
       <div class="d-grip gap-2">
         <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        <script>
+          function validar_formulario(e) {
+            const nome = document.getElementById("id_nome").value;
+            const telefone = document.getElementById("id_telefone").value;
+            if(!nome || !telefone) {
+              alert("Os campos Nome e Telefone são obrigatórios!");
+              e.preventDefault();
+      
+            }else{
+              const texto = `${nome} confirma a reserva com o número de telefone ${telefone}?`;
+              if(!confirm(texto)) {
+                e.preventDefault();
+              }
+            }
+          }
+          const form = document.getElementById("form");
+          form.addEventListener("submit", validar_formulario);
+        </script> 
       </div >
     </div>
     <footer class="pt-5 my-5 text-muted border-top">
-      <a id = 'Dev' href = 'https://www.linkedin.com/in/diogo-santana-aa26a8187/' >
+      <a id = 'Dev' href = 'https://www.linkedin.com/in/diogo-santana-aa26a8187/'target="_blank">
         Dev - Diogo Santana &middot; &copy; 2023
       </a>
     </footer>
   </div>
 </form>
 </body>
-  <script>
-    function validar_formulario(e) {
-      const nome = document.getElementById("id_nome").value
-      const telefone = document.getElementById("id_telefone").value
-      if(!nome || !telefone) {
-        alert("Os campos Nome e Telefone são obrigatórios!")
-        e.preventDefault()
-
-      }else{
-        const texto = `${nome} confirma a reserva com o número de telefone ${telefone}?`
-        if(!confirm(texto)) {
-          e.preventDefault()
-        }
-      }
-      return true
-    }
-    const form = document.getElementById("form").value
-    form.addEventListener("submit", validar_formulario)
-  </script>
 
 </html>
